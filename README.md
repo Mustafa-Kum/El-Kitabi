@@ -38,5 +38,5 @@ smbclient -L <ip.adress> ---> Full enum
 smbclient //<ip.adress>/<Bakmak istediğiniz dosyanın ismi>
 
 # SCP kullanımı #
-scp /root/37292.c karen@ip.adress:/tmp ---> Karşı tarafa ssh ile dosya aktarımı
+scp /root/37292.c <Kullanıcının ismi>@<ip.adress>:/tmp ---> Karşı tarafa ssh ile dosya aktarımı
 
