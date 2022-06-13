@@ -28,8 +28,11 @@ dirb http://<ip.adress> /usr/share/wordlists/dirbuster/directory-list-2.3-medium
 
 # JohnTheRipper Örnek Kullanımlar #
 john -format=bcrypt --wordlist=/usr/share/wordlists/rockyou.txt /root/Desktop/spider.txt ---> Hash formatını biliyorsanız -format=<buraya yazınız>
+
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
+
 zip2john backup.zip > backup.hash ---> Zip şifrelerini hashlemek ve ardından kırmak için. ---> Kırmak istediğiniz zip > " hash çıktısının dosya adı "
+
 ssh2john id_rsa > aa.txt ---> id_rsa'leri kırmak için.
 
 # SMB'ye bakmak için #
