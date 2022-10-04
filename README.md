@@ -313,6 +313,9 @@ allintext: ---> Tüm textin içerisinde arama yapmak için. Örn: allintext:"@gm
 # NetDiscover #
 netdiscover -r 182.154.164.1/24
 
+# Redirect Port #
+
+iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 
  
 
