@@ -372,6 +372,18 @@ keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg R
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore ngroktest.apk alias_name
 
 jarsigner -verify -verbose -certs android_shell.apk
+ 
+ ## Türkçe Klavye ##
+
+setxkbmap tr
+
+## App-Debug-APKTOOL ## 
+
+apktool d app-debug-apk
+
+apktool b app-debug -o newapk.apk
+
+
 
  
 
