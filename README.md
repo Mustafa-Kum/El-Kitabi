@@ -383,6 +383,22 @@ apktool d app-debug-apk
 
 apktool b app-debug -o newapk.apk
 
+## JDX ##
+
+jadx -d appdebug appdebug.apk
+
+jadx -d appdebug appdebug.apk --deobf
+
+## FireBase ##
+
+https://firestore.googleapis.com/v1/projects/YOUR_PROJECT_ID/databases/(default)/documents/cities/LA
+
+https://firestore.googleapis.com/v1/projects/YOUR_PROJECT_ID/databases/(default)/documents/<Koleksiyon Adı>
+
+curl -X GET "https://firestore.googleapis.com/v1/projects/YOUR_PROJECT_ID/databases/(default)/documents/<Koleksiyon Adı>";
+
+curl -X DELETE "https://firestore.googleapis.com/v1/projects/YOUR_PROJECT_ID/databases/(default)/documents/<Koleksiyon Adı>/<ID>";
+
 
 
  
