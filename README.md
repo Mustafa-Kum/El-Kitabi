@@ -31,11 +31,14 @@ nmap -sV -sC -A -T4 <ip.adress>
 dirb http://<ip.adress> /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 
 # JohnTheRipper Örnek Kullanımlar #
+
 john -format=bcrypt --wordlist=/usr/share/wordlists/rockyou.txt /root/Desktop/spider.txt ---> Hash formatını biliyorsanız -format=<buraya yazınız>
 
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 
 zip2john backup.zip > backup.hash ---> Zip şifrelerini hashlemek ve ardından kırmak için. ---> Kırmak istediğiniz zip > " hash çıktısının dosya adı "
+
+hashcat -m 13600 backup.hash /usr/share/wordlists/rockyou.txt
 
 ssh2john id_rsa > aa.txt ---> id_rsa'leri kırmak için.
 
@@ -309,6 +312,8 @@ intext: ---> Textlerde geçen ifadeler için.
 filetype: ---> Verilecek olan ifadenin dosya biçimine göre arama yapar. Örn: filetype:pdf hacking ---> Hacking kelimesini içeren pdf dosyaları.
 
 allintext: ---> Tüm textin içerisinde arama yapmak için. Örn: allintext:"@gmail.com"
+
+buildwith.com
 
 # NetDiscover #
 netdiscover -r 182.154.164.1/24
