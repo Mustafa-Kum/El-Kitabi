@@ -594,6 +594,18 @@ keys list
 keys add KEY_NAME KEY_VALUE
 
 keys remove KEY_NAME
+ 
+# Apache2 User-Agent Default #
+
+cat /etc/apache2/sites-available/000-default.conf  | grep -v '#'
+
+RewriteEngine On
+
+RewriteCond %{HTTP_USER_AGENT} "^NotMeterpreter$"
+
+ProxyPass "/" "http://localhost:8080/"
+
+
 
 
 
