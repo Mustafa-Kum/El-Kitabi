@@ -36,6 +36,8 @@ nmap -iL list_of_hosts.txt
 
 nmap -PR -sn 10.10.210.6/24
 
+--script-args http.useragent="CUSTOM_AGENT"
+
 # Dirb Örnek Basic Kullanım #
 
 dirb http://<ip.adress> /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
