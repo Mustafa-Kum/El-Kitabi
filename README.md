@@ -18,6 +18,12 @@
 
 hashcat -m 0 -a 0 "UWFwdyBFZWtjbCAtIFB2ciBSTUtQLi4uWFpXIFZXVVIuLi4gVFRJIFhFRi4uLiBMQUEgWlJHUVJPISEhIQpTZncuIEtham5tYiB4c2kgb3d1b3dnZQpGYXouIFRtbCBma2ZyIHFnc2VpayBhZyBvcWVpYngKRWxqd3guIFhpbCBicWkgYWlrbGJ5d3FlClJzZnYuIFp3ZWwgdnZtIGltZWwgc3VtZWJ0IGxxd2RzZmsKWWVqci4gVHFlbmwgVnN3IHN2bnQgInVycXNqZXRwd2JuIGVpbnlqYW11IiB3Zi4KCkl6IGdsd3cgQSB5a2Z0ZWYuLi4uIFFqaHN2Ym91dW9leGNtdndrd3dhdGZsbHh1Z2hoYmJjbXlkaXp3bGtic2lkaXVzY3ds" /usr/share/wordlists/rockyou.txt --force
 
+hashcat -m 0 -a 0 "UWFwdyBFZWtjbCAtIFB2ciBSTUtQLi4uWFpXIFZXVVIuLi4gVFRJIFhFRi4uLiBMQUEgWlJHUVJPISEhIQpTZncuIEtham5tYiB4c2kgb3d1b3dnZQpGYXouIFRtbCBma2ZyIHFnc2VpayBhZyBvcWVpYngKRWxqd3guIFhpbCBicWkgYWlrbGJ5d3FlClJzZnYuIFp3ZWwgdnZtIGltZWwgc3VtZWJ0IGxxd2RzZmsKWWVqci4gVHFlbmwgVnN3IHN2bnQgInVycXNqZXRwd2JuIGVpbnlqYW11IiB3Zi4KCkl6IGdsd3cgQSB5a2Z0ZWYuLi4uIFFqaHN2Ym91dW9leGNtdndrd3dhdGZsbHh1Z2hoYmJjbXlkaXp3bGtic2lkaXVzY3ds" /usr/share/wordlists/rockyou.txt --show
+
+hashcat -a 3 ?d?d?d?d --stdout
+
+ashcat -m 0 -a 3 "e48e13207341b6bffb7fb1622282247b" ?d?d?d?d
+
 # GCC Compile #
 
 -o ---> dosyanın çıktısının ismi.
@@ -44,6 +50,8 @@ dirb http://<ip.adress> /usr/share/wordlists/dirbuster/directory-list-2.3-medium
 
 # JohnTheRipper Örnek Kullanımlar #
 
+cat /etc/john/john.conf|grep "List.Rules:" | cut -d"." -f3 | cut -d":" -f2 | cut -d"]" -f1 | awk NF
+
 john -format=bcrypt --wordlist=/usr/share/wordlists/rockyou.txt /root/Desktop/spider.txt ---> Hash formatını biliyorsanız -format=<buraya yazınız>
 
 john hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
@@ -53,6 +61,10 @@ zip2john backup.zip > backup.hash ---> Zip şifrelerini hashlemek ve ardından k
 hashcat -m 13600 backup.hash /usr/share/wordlists/rockyou.txt
 
 ssh2john id_rsa > aa.txt ---> id_rsa'leri kırmak için.
+
+john --wordlist=/tmp/single-password-list.txt --rules=best64 --stdout | wc -l
+
+john --wordlist=single-password-list.txt --rules=KoreLogic --stdout |grep "Tryh@ckm3"
 
 # SMB'ye bakmak için #
 
