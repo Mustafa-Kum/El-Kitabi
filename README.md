@@ -812,6 +812,38 @@ nslookup.exe
 server 10.10.191.199
 
 ls -d thmredteam.com
+	
+# Linux Enum #
+
+ls /etc/*-release
+
+hostname / who / whoami / w / id / last / sudo -l
+
+cat /etc/passwd / cat /etc/resolv.conf / cat /etc/shadow
+
+/etc/group
+
+ls -lh /var/mail/
+
+dpkg -l / dpkg -qa
+
+ip a s
+
+sudo netstat -plt / sudo netstat -atupn / sudo lsof -i / sudo lsof -i :25
+
+ps axf / ps -f / ps aux / ps -ef | grep peter
+
+# Windows Enum #
+
+systeminfo / whoiam / whoami /priv / whoami /groups / net user / net group / net localgroup / net localgroup administrators / net accounts / net accounts /domain
+
+ipconfig / netstat -abno
+
+wmic qfe get Caption, Description
+
+net start
+
+wmic product get name,version,vendor
 
 
 
