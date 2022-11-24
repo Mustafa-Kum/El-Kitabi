@@ -275,6 +275,18 @@ curl -s http://www.team.thm/scripts/script.old
 
 curl -s 10.10.83.164 -D header.txt
 
+curl -X POST -d 'username=admin&password=admin' http://<SERVER_IP>:<PORT>/ -i
+
+curl -b 'PHPSESSID=c1nsa6op7vtk7kdis7bcnbadf1' http://<SERVER_IP>:<PORT>/
+
+curl -H 'Cookie: PHPSESSID=c1nsa6op7vtk7kdis7bcnbadf1' http://<SERVER_IP>:<PORT>/
+
+curl -u admin:admin http://<SERVER_IP>:<PORT>/
+
+curl -H 'Authorization: Basic YWRtaW46YWRtaW4=' http://<SERVER_IP>:<PORT>/
+
+curl 'http://<SERVER_IP>:<PORT>/search.php?search=le' -H 'Authorization: Basic YWRtaW46YWRtaW4='
+
 # GPG - GPGToJohn #
 
 gpg --import priv.key
